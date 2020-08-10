@@ -32,7 +32,6 @@ authRouter.get("/sign-in", (req, res, next) => {
 });
 
 authRouter.post("/sign-in", (req, res, next) => {
-  console.log("why can't I log");
   const { username, password } = req.body;
   let user;
   User.findOne({ username })
@@ -47,7 +46,6 @@ authRouter.post("/sign-in", (req, res, next) => {
     .then((comparison) => {
       if (comparison) {
         req.session.userId = user._id;
-        console.log(req.session);
         res.redirect("/");
       } else {
         return Promise.reject(new Error("Incorrect password"));
